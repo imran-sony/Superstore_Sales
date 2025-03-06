@@ -34,8 +34,10 @@ order by Total_Sales desc;
 
 -- Top 5 Best-Selling Products
 select `product name` Product_Name,
-round(sum(sales),2) Total_Sales
+round(sum(sales),2) Total_Sales  
 from sales_data
 group by `product name`
 order by Total_Sales desc
 limit 5;
+
+
