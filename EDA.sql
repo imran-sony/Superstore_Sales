@@ -13,6 +13,10 @@ SELECT
 	COUNT(*) Row_Count 
 FROM sales_data;
 
+SELECT
+	COUNT(DISTINCT (`Row ID`)) RowID_Count
+FROM sales_data;
+
 -- Total Sales
 SELECT 
 	ROUND(SUM(sales),2) Total_Sales 
@@ -86,23 +90,21 @@ SELECT
 	SUM(CASE WHEN `Return Status`="Not Returned" THEN 1 ELSE 0 END) Not_Returned,
 	ROUND(SUM(CASE WHEN `Return Status`="Returned" THEN 1 ELSE 0 END)/(COUNT(`Return Status`))*100,2) Return_Percentage
 FROM sales_data;
-
--- Order Date Formatting
+    
+-- Yearly & Monthly Sales
 SELECT 
-	`Order Date`,
-	STR_TO_DATE(`Order Date`, '%m/%d/%y') FORMATTED_DATE
-FROM sales_data;
-
-SELECT 
-	`Order Date` Order_Date,
-	YEAR(STR_TO_DATE(`Order Date`, '%m/%d/%y')) Year,
-	MONTHNAME(STR_TO_DATE(`Order Date`, '%m/%d/%y')) MONTH
-FROM sales_data;
-
--- Monthly Sales
-SELECT 
-	MONTHNAME(STR_TO_DATE(`Order Date`, '%m/%d/%y')) MONTH,
+    YEAR(STR_TO_DATE(`Order Date`, '%m/%d/%Y')) YEAR,
+    MONTHNAME(STR_TO_DATE(`Order Date`, '%m/%d/%Y')) MONTH
 	ROUND(SUM(sales),2) Total_Sales
 FROM sales_data
-GROUP BY MONTH
+GROUP BY YEAR, MONTH
+ORDER BY Total_Sales DESC;
+
+-- Order Priority wise Sales
+SELECT 
+	DISTINCT(`Order Priority`) Order_Priority,
+	ROUND(SUM(Sales),2) Total_Sales
+FROM sales_data
+WHERE  `Order Priority`=TRIM(`Order Priority`)
+GROUP BY `Order Priority`
 ORDER BY Total_Sales DESC;
