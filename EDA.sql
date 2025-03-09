@@ -94,11 +94,11 @@ FROM sales_data;
 -- Yearly & Monthly Sales
 SELECT 
     YEAR(STR_TO_DATE(`Order Date`, '%m/%d/%Y')) YEAR,
-    MONTHNAME(STR_TO_DATE(`Order Date`, '%m/%d/%Y')) MONTH
+    MONTH(STR_TO_DATE(`Order Date`, '%m/%d/%Y')) MONTH,
 	ROUND(SUM(sales),2) Total_Sales
 FROM sales_data
 GROUP BY YEAR, MONTH
-ORDER BY Total_Sales DESC;
+ORDER BY YEAR, MONTH;
 
 -- Order Priority wise Sales
 SELECT 
