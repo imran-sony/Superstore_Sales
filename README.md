@@ -1,2 +1,2 @@
 ## Superstore Sales Data Analysis
-Exploratory Data Analysis and RFM Segmentation of Superstore Sales Data using MySQL
+RFM Segmentation and Exploratory Data Analysis of Superstore Sales Data using MySQL.
