@@ -1,6 +1,7 @@
 SELECT * FROM sales_data;
 
 -- Order Date Formatting
+
 SELECT 
 	`Order Date`,
 	STR_TO_DATE(`Order Date`, '%m/%d/%Y') Formatted_Order_Date
@@ -30,6 +31,7 @@ GROUP BY `Customer Name`
 ORDER BY Last_Order_Date;
 
 -- RFM Segmentation
+
 CREATE OR REPLACE VIEW RFM_SCORE_DATA AS
 WITH CUSTOMER_AGGREGATED_DATA AS
 (SELECT
