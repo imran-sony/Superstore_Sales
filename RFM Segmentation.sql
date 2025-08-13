@@ -4,7 +4,7 @@ SELECT * FROM sales_data;
 
 SELECT 
 	`Order Date`,
-	STR_TO_DATE(`Order Date`, '%m/%d/%Y') Formatted_Order_Date
+	STR_TO_DATE(`Order Date`, '%m/%d/%Y') AS Formatted_Order_Date
 FROM sales_data;
 
 SET SQL_SAFE_UPDATES = 0;
@@ -19,13 +19,13 @@ SET SQL_SAFE_UPDATES = 1;
 SELECT Formatted_Order_Date FROM sales_data;
 
 SELECT 
-	MIN(Formatted_Order_Date) First_Order_Date,
-	MAX(Formatted_Order_Date) Last_Order_Date
+	MIN(Formatted_Order_Date) AS First_Order_Date,
+	MAX(Formatted_Order_Date) AS Last_Order_Date
 FROM sales_data;
 
 SELECT
 	`Customer Name`,
-	MAX(Formatted_Order_Date) Last_Order_Date
+	MAX(Formatted_Order_Date) AS Last_Order_Date
 FROM sales_data
 GROUP BY `Customer Name`
 ORDER BY Last_Order_Date;
@@ -75,7 +75,7 @@ SELECT
         WHEN RFM_SCORE_COMBINATION IN (222, 231, 221,  223, 233, 322) THEN 'POTENTIAL CHURNERS'
         WHEN RFM_SCORE_COMBINATION IN (323, 333,321, 341, 422, 332, 432) THEN 'ACTIVE'
         WHEN RFM_SCORE_COMBINATION IN (433, 434, 443, 444) THEN 'LOYAL'
-    ELSE 'Other'
+    ELSE 'OTHER'
     END AS CUSTOMER_SEGMENT
 FROM RFM_SCORE_DATA;
 
